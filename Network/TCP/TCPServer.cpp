@@ -32,28 +32,27 @@ bool TCPServer::Authenticate(std::unique_ptr<sf::TcpSocket>& socket) // Function
 						guuid++; // Increase the guuid ready for the next connection
 						return true; // Socket authentication sucessful
 					}
-					else std::cout << "Failed to send Authentication success.\n";
+					// Failed to send Authentication success
 				}
-				else std::cout << "GUUID MISMATCH.\n";
+				// GUUID MISMATCH.\n";
 			}
-			else std::cout << "Client Authentication response is of wrong type.\n";
+			// Client Authentication response is of wrong type.\n";
 		}
-		else std::cout << "Could not retrieve client response.\n";
+		// Could not retrieve client response
 	}
-	else std::cout << "Could not send GUUID to client.\n";
+	// Could not send GUUID to client
 	return false; // Socket authentication not sucessful
 }
 
 TCPServer::TCPServer(unsigned short port): listening_port(port), guuid(1)
 {
 	if(listener.listen(port) != sf::Socket::Status::Done) // If we can't start listening for connections
-		std::cout << "Could not start TCP service on port: ";
+		// Could not start the TCP service
 	else
 	{
 		selector.add(listener); // Add the listener to the selector
-		std::cout << "TCP service started on port: " << port << "\n";
+		// TCP service started
 	}
-	std::cout << port << "\n";
 }
 
 bool TCPServer::AcceptConnection() // Function attempts to gain a new authenticated connection
@@ -66,12 +65,20 @@ bool TCPServer::AcceptConnection() // Function attempts to gain a new authentica
 			if(listener.accept(*socket)) // If we accepted the connection attempt an authentication
 			{
 				if(Authenticate(socket))
-					std::cout << "Authenticated connection from : ";
-				else std::cout << "Rejecting un-authenticated client from: ";
-				std::cout << socket->getRemoteAddress() << "\n";
+				{
+					// Authenticated connection
+					return true;
+				}
+				else
+				{
+					//Rejecting un-authenticated client
+				}
 			}
+			// No pending connection
 		}
+		// Socket not ready
 	}
+	return false;
 }
 
 bool TCPServer::SendPacket(unsigned long id, sf::Packet& p) // Function sends a packet to a known guuid
