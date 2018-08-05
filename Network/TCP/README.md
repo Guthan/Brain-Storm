@@ -1,11 +1,18 @@
 # Notes
 
-Compiled on: Intel Pentium
-Toolchain vendor: GNU GCC 5.1.0 TDM (MingW)
-SFML Version: 2.5.0
-Operating System: Windows 7 x86
+**Compiled on**
+- *Intel Pentium*  
 
-- Compiler and linker flags can be found in "compile.bat"
+**Toolchain vendor**
+- *GNU GCC 5.1.0 TDM (MingW)*  
+
+**SFML Version**
+- *2.5.0*  
+
+**Operating System**
+- *Windows 7 x86*  
+
+- *Compiler and linker flags can be found in "compile.bat"*  
 
 # Current Goals
 
