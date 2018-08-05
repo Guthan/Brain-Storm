@@ -47,7 +47,9 @@ bool TCPServer::Authenticate(std::unique_ptr<sf::TcpSocket>& socket) // Function
 TCPServer::TCPServer(unsigned short port): listening_port(port), guuid(1)
 {
 	if(listener.listen(port) != sf::Socket::Status::Done) // If we can't start listening for connections
+	{
 		// Could not start the TCP service
+	}
 	else
 	{
 		selector.add(listener); // Add the listener to the selector
