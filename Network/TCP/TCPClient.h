@@ -3,7 +3,6 @@
 
 #include <SFML/Network.hpp>
 
-#include <iostream>
 #include <string>
 
 enum class ConnectionState { NOAUTH, AUTH_OK };
