@@ -34,9 +34,9 @@ bool TCPServer::Authenticate(std::unique_ptr<sf::TcpSocket>& socket) // Function
 					}
 					// Failed to send Authentication success
 				}
-				// GUUID MISMATCH.\n";
+				// GUUID MISMATCH
 			}
-			// Client Authentication response is of wrong type.\n";
+			// Client Authentication response is of wrong type
 		}
 		// Could not retrieve client response
 	}
