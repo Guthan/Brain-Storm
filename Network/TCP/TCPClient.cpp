@@ -42,7 +42,7 @@ TCPClient::TCPClient(sf::IpAddress addr, unsigned short port)
 	{
 		if(Authenticate(server_socket))
 		{
-			std::cout << "Authentication successful.\n";
+			//Authentication successful
 		}
 	}
 }
