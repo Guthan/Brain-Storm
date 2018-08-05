@@ -7,16 +7,16 @@ bool TCPServer::Authenticate(std::unique_ptr<sf::TcpSocket>& socket) // Function
 	sf::Socket::Status status = socket->send(id); // Send the packet
 	while(status == sf::Socket::Status::Partial) // While only part of the packet was sent
 		status = socket->send(id); // Keep attempting send
-	if(status == sf::Socket::Status::Done) // If the guuid send was sucessful
+	if(status == sf::Socket::Status::Done) // If the guuid send was successful
 	{
 		id.clear(); // Clear the packet of data ready for new information
 		status = socket->receive(id); // Attempt to receive response from client
 		while(status == sf::Socket::Status::Partial) // While only part of the packet was received
 			status = socket->receive(id); // Keep attempting to receive
-		if(status == sf::Socket::Status::Done) // If receive was sucessful
+		if(status == sf::Socket::Status::Done) // If receive was successful
 		{
 			sf::Uint64 check = 0; // Create a variable to store guuid response
-			if(id >> check) // If attempt to extact guuid from packet was sucessful
+			if(id >> check) // If attempt to extact guuid from packet was successful
 			{
 				if(check == (sf::Uint64)guuid) // If response matches guuid that was sent
 				{
@@ -30,7 +30,7 @@ bool TCPServer::Authenticate(std::unique_ptr<sf::TcpSocket>& socket) // Function
 						clients[guuid] = std::move(socket); // Add the guuid and socket to the map
 						selector.add(*clients[guuid]); // Add trusted socket to the selector
 						guuid++; // Increase the guuid ready for the next connection
-						return true; // Socket authentication sucessful
+						return true; // Socket authentication successful
 					}
 					// Failed to send Authentication success
 				}
@@ -41,7 +41,7 @@ bool TCPServer::Authenticate(std::unique_ptr<sf::TcpSocket>& socket) // Function
 		// Could not retrieve client response
 	}
 	// Could not send GUUID to client
-	return false; // Socket authentication not sucessful
+	return false; // Socket authentication not successful
 }
 
 TCPServer::TCPServer(unsigned short port): listening_port(port), guuid(1)
@@ -85,11 +85,11 @@ bool TCPServer::AcceptConnection() // Function attempts to gain a new authentica
 
 bool TCPServer::SendPacket(unsigned long id, sf::Packet& p) // Function sends a packet to a known guuid
 {
-	if(clients.find(id) == clients.end()) return false; // If id is not in the list return unsucessful
+	if(clients.find(id) == clients.end()) return false; // If id is not in the list return unsuccessful
 	sf::Socket::Status status = clients[id]->send(p); // Send the packet
 	while(status == sf::Socket::Status::Partial) // While only part of the packet was sent
 		status = clients[id]->send(p); // Keep attempting send
-	if(status == sf::Socket::Status::Done) // If packet was sent return sucessful
+	if(status == sf::Socket::Status::Done) // If packet was sent return successful
 		return true;
 	return false;
 }
