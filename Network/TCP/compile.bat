@@ -1,0 +1,9 @@
+@echo off
+echo Compiling TCPClient...
+g++ -c TCPClient.cpp -std=c++11 -IC:\SFML-2.5.0\include
+echo Compiling TCPServer...
+g++ -c TCPServer.cpp -std=c++11 -IC:\SFML-2.5.0\include
+echo Building TCP DLL...
+g++ -shared TCPClient.o TCPServer.o -o TCP.dll -std=c++11 -static -static-libgcc -LC:\SFML-2.5.0\lib -lsfml-system -lws2_32 -lsfml-network -lwinmm
+echo Done.
+@pause>nul
